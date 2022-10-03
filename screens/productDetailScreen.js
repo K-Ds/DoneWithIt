@@ -2,7 +2,6 @@ import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 
 const ProductDetailScreen = ({ route }) => {
-  console.log(route.params);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{route.params.name}</Text>
