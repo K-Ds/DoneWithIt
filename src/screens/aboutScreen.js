@@ -5,7 +5,10 @@ const AboutScreen = ({ Navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.brand}>
-        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+        <Image
+          style={styles.logo}
+          source={require("../../assets/logo-red.png")}
+        />
         <Text style={{ color: "red" }}>DoneWithIt</Text>
       </View>
       <Text style={styles.title}>About Us</Text>

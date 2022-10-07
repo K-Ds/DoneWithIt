@@ -12,10 +12,13 @@ const HomeScreen = ({ navigation }) => {
   return (
     <ImageBackground
       style={styles.container}
-      source={require("../assets/background.jpg")}
+      source={require("../../assets/background.jpg")}
     >
       <View style={styles.brand}>
-        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
+        <Image
+          style={styles.logo}
+          source={require("../../assets/logo-red.png")}
+        />
         <Text style={{ color: "red" }}>DoneWithIt</Text>
       </View>
       <Text style={styles.text}>

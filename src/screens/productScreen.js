@@ -2,7 +2,6 @@ import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import { connect, useDispatch } from "react-redux";
 import ProductCard from "../components/productCard";
-import data from "../data.js";
 
 const ProductScreen = ({ navigation, productList }) => {
   const dispatch = useDispatch();
