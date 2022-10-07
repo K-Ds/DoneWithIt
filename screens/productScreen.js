@@ -1,32 +1,21 @@
 import React from "react";
 import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { connect, useDispatch } from "react-redux";
 import ProductCard from "../components/productCard";
 import data from "../data.js";
 
-const ProductScreen = ({ navigation }) => {
+const ProductScreen = ({ navigation, productList }) => {
+  const dispatch = useDispatch();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.card}>
-        <ProductCard
-          data={data[0]}
-          onPress={() => navigation.push("Detail", data[0])}
-        />
-        <ProductCard
-          data={data[1]}
-          onPress={() => navigation.push("Detail", data[1])}
-        />
-        <ProductCard
-          data={data[2]}
-          onPress={() => navigation.push("Detail", data[2])}
-        />
-        <ProductCard
-          data={data[3]}
-          onPress={() => navigation.push("Detail", data[3])}
-        />
-        <ProductCard
-          data={data[4]}
-          onPress={() => navigation.push("Detail", data[4])}
-        />
+        {productList.map((product) => (
+          <ProductCard
+            key={product.id}
+            data={product}
+            onPress={() => navigation.push("Detail", product)}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
@@ -47,4 +36,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductScreen;
+function mapStateToProps(state) {
+  return { productList: state.products };
+}
+
+export default connect(mapStateToProps)(ProductScreen);

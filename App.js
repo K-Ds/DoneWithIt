@@ -1,5 +1,7 @@
 import "react-native-gesture-handler";
 import React from "react";
+import store from "./redux/store/store";
+import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -15,22 +17,11 @@ const ProductStack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-const HomeDrawer = () => (
-  <Drawer.Navigator initialRouteName="Root" useLegacyImplementation={true}>
-    <Drawer.Screen
-      name="Root"
-      component={HomeScreen}
-      options={{ title: "Home" }}
-    />
-    <Drawer.Screen name="Profile" component={ProfileScreen} />
-  </Drawer.Navigator>
-);
-
 const RootStackScreen = () => (
   <RootStack.Navigator>
     <RootStack.Screen
       name="Home"
-      component={HomeDrawer}
+      component={HomeScreen}
       options={{ headerShown: false }}
     />
     <RootStack.Screen name="About" component={AboutScreen} />
@@ -39,11 +30,7 @@ const RootStackScreen = () => (
 
 const ProductStackScreen = () => (
   <ProductStack.Navigator>
-    <ProductStack.Screen
-      name="Products"
-      component={ProductScreen}
-      options={{ headerShown: false }}
-    />
+    <ProductStack.Screen name="Products" component={ProductScreen} />
     <ProductStack.Screen name="Detail" component={ProductDetailScreen} />
   </ProductStack.Navigator>
 );
@@ -64,14 +51,31 @@ const Tab = () => (
       component={RootStackScreen}
       options={{ headerShown: false, title: "Home" }}
     />
-    <Tabs.Screen name="Products" component={ProductStackScreen} />
+    <Tabs.Screen
+      name="Products"
+      component={ProductStackScreen}
+      options={{ headerShown: false }}
+    />
   </Tabs.Navigator>
+);
+
+const HomeDrawer = () => (
+  <Drawer.Navigator initialRouteName="Root" useLegacyImplementation={true}>
+    <Drawer.Screen
+      name="Tab"
+      component={Tab}
+      options={{ title: "DoneWithIt" }}
+    />
+    <Drawer.Screen name="Profile" component={ProfileScreen} />
+  </Drawer.Navigator>
 );
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tab />
-    </NavigationContainer>
+    <Provider store={store()}>
+      <NavigationContainer>
+        <HomeDrawer />
+      </NavigationContainer>
+    </Provider>
   );
 }

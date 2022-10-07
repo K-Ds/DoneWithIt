@@ -1,9 +1,9 @@
 import React from "react";
-import { View, Text, Image, Pressable, StyleSheet } from "react-native";
+import { View, Text, Image, Pressable, Button, StyleSheet } from "react-native";
 
 const ProductCard = (props) => {
   const params = props.data;
-
+  console.log(props);
   return (
     <Pressable style={styles.productCard} onPress={props.onPress}>
       <Image style={styles.image} source={params.image} />
